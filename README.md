@@ -1,8 +1,8 @@
 # Passwort Generator
 
-Dieses Projekt ist ein einfacher, sicherer Passwort-Manager und Generator, der mithilfe der `cryptography`-Bibliothek Passwörter verschlüsselt speichert und entschlüsselt. Der Benutzer kann neue Passwörter generieren, speichern und bestehende Passwörter einlesen.
+Dieses Projekt ist ein modularer, sicherer Passwort-Manager und Generator, der mithilfe der `cryptography`-Bibliothek Passwörter verschlüsselt speichert und entschlüsselt. Der Benutzer kann neue Passwörter generieren, speichern und bestehende Passwörter einlesen.
 
-Dieses Projekt läuft (funktioniert). Ich sehe aber noch einiges zu tun...
+Das Projekt ist funktional, jedoch gibt es noch Potenzial für Erweiterungen und Verbesserungen.
 
 ## Anforderungen
 - Python 3.7 oder höher
@@ -15,7 +15,7 @@ pip install cryptography
 
 ## Funktionen
 ### 1. Generierung eines Verschlüsselungsschlüssels
-Die Funktion `generate_key()` generiert einen sicheren Schlüssel und speichert ihn in der Datei `pw_generator/key`. Dies muss nur einmal ausgeführt werden, um den Schlüssel zu erstellen.
+Die Funktion `generate_key()` generiert einen sicheren Schlüssel und speichert ihn in der Datei `files/key`. Dies muss nur einmal ausgeführt werden, um den Schlüssel zu erstellen.
 
 ### 2. Generierung eines sicheren Passworts
 Die Funktion `passwort_erzeugen()` erstellt ein Passwort basierend auf:
@@ -24,7 +24,7 @@ Die Funktion `passwort_erzeugen()` erstellt ein Passwort basierend auf:
 
 ### 3. Verschlüsselung und Speicherung von Passwörtern
 - Die Funktion `verschluesseln()` verschlüsselt Passwörter mit dem Fernet-Algorithmus.
-- Die Passwörter werden in der Datei `pw_generator/passwords` gespeichert. Jedes Passwort wird mit einem Referenznamen versehen.
+- Die Passwörter werden in der Datei `files/passwords` gespeichert. Jedes Passwort wird mit einem Referenznamen versehen.
 
 ### 4. Entschlüsselung und Abruf von Passwörtern
 Die Funktion `passwort_lesen()` sucht nach einem gespeicherten Passwort basierend auf dem Referenznamen und entschlüsselt es, falls gefunden.
@@ -33,23 +33,27 @@ Die Funktion `passwort_lesen()` sucht nach einem gespeicherten Passwort basieren
 Das Projekt verwendet folgende Ordnerstruktur:
 ```
 .
-├── pw_generator/
+├── files/
 │   ├── key            # Enthält den generierten Verschlüsselungsschlüssel
 │   ├── passwords      # Speichert die verschlüsselten Passwörter
-└── passwort_generator.py
+├── konstanten.py      # Enthält Konfigurationswerte und Pfade
+├── main.py            # Startpunkt des Programms
+├── passwort_handler.py # Funktionen für Passwort-Management
+├── verschluesselungs_handler.py # Funktionen für Schlüssel- und Verschlüsselungslogik
+└── README.md          # Dokumentation des Projekts
 ```
 
 ## Nutzung
 1. **Generiere den Verschlüsselungsschlüssel (nur einmal):**
    ```python
-   from passwort_generator import generate_key
+   from verschluesselungs_handler import generate_key
    generate_key()
    ```
 
-2. **Starte den Passwort Generator:**
-   Führe das Skript aus:
+2. **Starte den Passwort-Manager:**
+   Führe das Hauptskript aus:
    ```bash
-   python passwort_generator.py
+   python main.py
    ```
 
 3. **Menü-Optionen:**
@@ -75,8 +79,8 @@ Das Projekt verwendet folgende Ordnerstruktur:
 Wähle Option `3`, um das Programm zu beenden.
 
 ## Sicherheitshinweise
-- **Schlüssel sicher aufbewahren:** Die Datei `pw_generator/key` ist notwendig, um Passwörter zu entschlüsseln. Geht sie verloren, können die Passwörter nicht wiederhergestellt werden.
-- **Passwortdatei schützen:** Bewahre die Datei `pw_generator/passwords` an einem sicheren Ort auf.
+- **Schlüssel sicher aufbewahren:** Die Datei `files/key` ist notwendig, um Passwörter zu entschlüsseln. Geht sie verloren, können die Passwörter nicht wiederhergestellt werden.
+- **Passwortdatei schützen:** Bewahre die Datei `files/passwords` an einem sicheren Ort auf.
 
 ## Lizenz
 Dieses Projekt steht unter der MIT-Lizenz.
