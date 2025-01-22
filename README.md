@@ -2,7 +2,7 @@
 
 Dieses Projekt ist ein einfacher, sicherer Passwort-Manager und Generator, der mithilfe der `cryptography`-Bibliothek Passwörter verschlüsselt speichert und entschlüsselt. Der Benutzer kann neue Passwörter generieren, speichern und bestehende Passwörter einlesen.
 
-Dieses Projekt wird geupdatet bzw. u.a. in Bearbeitung
+Dieses Projekt läuft (funktioniert). Ich sehe aber noch einiges zu tun...
 
 ## Anforderungen
 - Python 3.7 oder höher

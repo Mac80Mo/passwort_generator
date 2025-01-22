@@ -5,12 +5,12 @@ import string  # Modul zur Verwendung von Zeichenketten (Buchstaben, Zahlen, Son
 # Funktion zur Generierung eines Verschlüsselungsschlüssels
 def generate_key():
     key = Fernet.generate_key()  # Generiert einen sicheren Fernet-Schlüssel
-    with open("key", "wb") as key_file:  # Speichert den Schlüssel in einer Datei
+    with open("pw_generator/key", "wb") as key_file:  # Speichert den Schlüssel in einer Datei
         key_file.write(key)
 
 # Funktion zum Laden des Verschlüsselungsschlüssels
 def load_key():
-    with open("key", "rb") as key_file:  # Öffnet die Datei im Lesemodus
+    with open("pw_generator/key", "rb") as key_file:  # Öffnet die Datei im Lesemodus
         return key_file.read()  # Gibt den gespeicherten Schlüssel zurück
 
 # Funktion zur Verschlüsselung einer Nachricht
@@ -44,12 +44,12 @@ def passwort_erzeugen(laenge=12, sonderzeichen=True):
 # Funktion zum Speichern eines Passworts
 def passwort_speichern(index: str, passwort: str, key: bytes):
     ver_passwort = verschluesseln(passwort, key)  # Verschlüsselt das Passwort
-    with open("passwords", "ab") as file:  # Öffnet die Passwortdatei im Anhangsmodus
+    with open("pw_generator/passwords", "ab") as file:  # Öffnet die Passwortdatei im Anhangsmodus
         file.write(index.encode() + b":" + ver_passwort + b"\n")  # Speichert den Index und das verschlüsselte Passwort
 
 # Funktion zum Einlesen eines gespeicherten Passworts
 def passwort_lesen(index: str, key: bytes):
-    with open("passwords", "rb") as file:  # Öffnet die Passwortdatei im Lesemodus
+    with open("pw_generator/passwords", "rb") as file:  # Öffnet die Passwortdatei im Lesemodus
         for line in file:  # Liest jede Zeile der Datei
             saved_index, ver_passwort = line.strip().split(b":")  # Trennt Index und verschlüsseltes Passwort
             if saved_index.decode() == index:  # Überprüft, ob der Index mit dem gewünschten übereinstimmt
